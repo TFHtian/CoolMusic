@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('../coolmusic.jks')
+            storePassword 'coolmusic2021'
+            keyAlias 'coolmusic'
+            keyPassword 'coolmusic2021'
+        }
+    }
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.tfh.coolmusic"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 100
+        versionName "1.0.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('-release.apk')) {
+                        def fileName = "coolmusic_${versionName}_C_${packTime()}.apk"
+                        output.outputFileName = new File("apk_release", fileName)
+                    }
+                }
+            }
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    androidExtensions {
+        experimental = true
+    }
+    dataBinding {
+        enabled = true
+    }
+    kapt {
+        generateStubs = true
+    }
+
+}
+
+static def packTime() {
+    return new Date().format("yyyy-MM-dd_HHmmss", TimeZone.getTimeZone("Asia/Shanghai"))
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    //common_library
+    implementation project(path: ':commonlibrary')
+    //图片加载
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+    //适配框架
+    implementation 'me.jessyan:autosize:1.2.1'
+    //BaseAdapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //微信开源项目，替代SP
+    implementation 'com.tencent:mmkv:1.0.23'
+    //管理界面状态库
+    implementation 'com.kingja.loadsir:loadsir:1.3.8'
+    //防崩溃
+    implementation 'cat.ereza:customactivityoncrash:2.3.0'
+    //腾讯三方功能库
+    implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+    //加载动画
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+}
