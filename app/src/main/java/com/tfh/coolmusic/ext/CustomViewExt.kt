@@ -48,12 +48,12 @@ fun LoadService<*>.showLoading() {
 }
 
 fun loadServiceInit(view: View, callback: () -> Unit): LoadService<Any> {
-    val loadsir = LoadSir.getDefault().register(view) {
+    val loadSir = LoadSir.getDefault().register(view) {
         //点击重试时触发的操作
         callback.invoke()
     }
-    loadsir.showSuccess()
-    return loadsir
+    loadSir.showSuccess()
+    return loadSir
 }
 
 //绑定普通的Recyclerview
