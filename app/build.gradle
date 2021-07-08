@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+
     signingConfigs {
         release {
             storeFile file('../coolmusic.jks')
@@ -12,13 +13,14 @@ android {
             keyPassword 'coolmusic2021'
         }
     }
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+
+    compileSdkVersion rootProject.ext.compile_version
+    buildToolsVersion rootProject.ext.build_version
 
     defaultConfig {
         applicationId "com.tfh.coolmusic"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion rootProject.ext.min_version
+        targetSdkVersion rootProject.ext.target_version
         versionCode 100
         versionName "1.0.0"
         multiDexEnabled true
