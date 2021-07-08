@@ -62,5 +62,6 @@ dependencies {
     api 'me.jessyan:retrofit-url-manager:1.4.0'
     //非必要依赖， log依赖，如果需要打印OkHttpLog需要添加
     api 'com.squareup.okhttp3:logging-interceptor:4.7.2'
-
+    //mmkv
+    api 'com.tencent:mmkv:1.2.10'
 }
