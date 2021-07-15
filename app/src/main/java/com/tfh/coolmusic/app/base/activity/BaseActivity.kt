@@ -87,7 +87,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDb
         //平板 大多数界面是默认以宽为基准适配，如果适配手机，大多数界面需要以高为基准适配
         try {
             runOnUiThread {
-                AutoSizeCompat.autoConvertDensityBaseOnWidth(super.getResources(), 750f)
+                AutoSizeCompat.autoConvertDensityBaseOnWidth(super.getResources(), 667f)
             }
         } catch (e: Exception) {
             LogUtils.debugInfo("适配异常$e")

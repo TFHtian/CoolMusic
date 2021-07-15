@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.gyf.immersionbar.ImmersionBar
+import com.tfh.commonlibrary.R
 import com.tfh.commonlibrary.base.viewmodel.BaseViewModel
 import com.tfh.commonlibrary.ext.getVmClazz
 import com.tfh.commonlibrary.network.manager.NetState
@@ -55,10 +57,22 @@ import com.tfh.commonlibrary.network.manager.NetworkStateManager
         super.onViewCreated(view, savedInstanceState)
         isFirst = true
         mViewModel = createViewModel()
+        setStatusBar()
         initView(savedInstanceState)
         createObserver()
         registerUiChange()
         initData()
+    }
+
+    /**
+     * 设置共同沉浸式样式
+     */
+    open fun setStatusBar(){
+        ImmersionBar.with(this)
+            .statusBarDarkFont(true)
+            .statusBarColor(R.color.white)
+            .navigationBarColor(R.color.white)
+            .init()
     }
 
     /**

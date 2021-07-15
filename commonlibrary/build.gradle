@@ -64,4 +64,6 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:4.7.2'
     //mmkv
     api 'com.tencent:mmkv:1.2.10'
+    //immersionbar状态栏
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
 }

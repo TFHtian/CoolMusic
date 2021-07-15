@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.gyf.immersionbar.ImmersionBar
+import com.tfh.commonlibrary.R
 import com.tfh.commonlibrary.base.viewmodel.BaseViewModel
 import com.tfh.commonlibrary.ext.getVmClazz
 import com.tfh.commonlibrary.network.manager.NetState
@@ -43,12 +45,24 @@ abstract class BaseVmDbActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppC
         mBinding = DataBindingUtil.setContentView(this, layoutId())
         mBinding.lifecycleOwner = this
         mViewModel = createViewModel()
+        setStatusBar()
         registerUiChange()
         initView(savedInstanceState)
         createObserver()
         NetworkStateManager.instance.mNetworkStateCallback.observeInActivity(this, Observer {
             onNetworkStateChanged(it)
         })
+    }
+
+    /**
+     * 设置共同沉浸式样式
+     */
+    open fun setStatusBar(){
+        ImmersionBar.with(this)
+            .statusBarDarkFont(true)
+            .statusBarColor(R.color.white)
+            .navigationBarColor(R.color.white)
+            .init()
     }
 
     /**
