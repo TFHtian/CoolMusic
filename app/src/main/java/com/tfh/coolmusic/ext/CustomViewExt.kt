@@ -6,12 +6,15 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tfh.coolmusic.R
+import com.tfh.coolmusic.data.entity.state.ListDataUiState
 import com.tfh.coolmusic.widget.loadCallBack.EmptyCallback
 import com.tfh.coolmusic.widget.loadCallBack.ErrorCallback
 import com.tfh.coolmusic.widget.loadCallBack.LoadingCallback
@@ -108,5 +111,46 @@ fun hideSoftKeyboard(activity: Activity?) {
             )
         }
     }
+}
 
+//加载数据
+fun <T> loadListData(
+    data: ListDataUiState<T>,
+    baseQuickAdapter: BaseQuickAdapter<T, *>,
+    loadService: LoadService<*>,
+    refreshLayout: SmartRefreshLayout
+) {
+    if (data.isSuccess) {
+        //成功
+        when {
+            //第一页并没有数据 显示空布局界面
+            data.isFirstEmpty -> {
+                refreshLayout.finishRefresh()
+                loadService.showEmpty()
+            }
+            //是第一页
+            data.isRefresh -> {
+                refreshLayout.finishRefresh()
+                baseQuickAdapter.setList(data.listData)
+            }
+            //不是第一页
+            else -> {
+                if (data.isEmpty){
+                    refreshLayout.finishLoadMoreWithNoMoreData()
+                }else{
+                    refreshLayout.finishLoadMore()
+                    baseQuickAdapter.addData(data.listData)
+                }
+            }
+        }
+    } else {
+        //失败
+        if (data.isRefresh) {
+            //如果是第一页，则显示错误界面，并提示错误信息
+            refreshLayout.finishRefresh()
+            loadService.showError(data.errMessage)
+        } else {
+            refreshLayout.finishLoadMoreWithNoMoreData()
+        }
+    }
 }

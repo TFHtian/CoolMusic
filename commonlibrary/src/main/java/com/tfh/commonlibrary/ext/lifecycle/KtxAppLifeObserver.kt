@@ -7,7 +7,7 @@ import com.tfh.commonlibrary.callback.livedata.BooleanLiveData
 
 object KtxAppLifeObserver : LifecycleObserver {
 
-    var isForeground = BooleanLiveData()
+    var isForeground = BooleanLiveData<Any>()
 
     //在前台
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

@@ -53,6 +53,6 @@ abstract class BaseTitleBarActivity<VM : BaseViewModel, DB : ViewDataBinding> : 
 
     }
 
-    abstract fun getTitleBar(): CommonTitleBar
+    abstract fun getTitleBar(): CommonTitleBar?
 
 }

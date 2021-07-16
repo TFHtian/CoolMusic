@@ -1,6 +1,6 @@
 package com.tfh.coolmusic.util
 
-import com.tfh.coolmusic.data.model.event.EventMessage
+import com.tfh.coolmusic.data.event.EventMessage
 import org.greenrobot.eventbus.EventBus
 
 /**

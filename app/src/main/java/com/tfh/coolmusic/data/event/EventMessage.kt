@@ -1,4 +1,4 @@
-package com.tfh.coolmusic.data.model.event
+package com.tfh.coolmusic.data.event
 
 /**
  * @author tianfenghui

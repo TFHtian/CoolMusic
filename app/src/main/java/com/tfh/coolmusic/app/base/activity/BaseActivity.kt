@@ -6,7 +6,7 @@ import androidx.databinding.ViewDataBinding
 import com.tfh.commonlibrary.base.activity.BaseVmDbActivity
 import com.tfh.commonlibrary.base.viewmodel.BaseViewModel
 import com.tfh.commonlibrary.util.LogUtils
-import com.tfh.coolmusic.data.model.event.EventMessage
+import com.tfh.coolmusic.data.event.EventMessage
 import com.tfh.coolmusic.ext.dismissLoadingExt
 import com.tfh.coolmusic.ext.showLoadingExt
 import com.tfh.coolmusic.util.EventBusUtils
