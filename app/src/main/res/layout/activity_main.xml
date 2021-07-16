@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:titlebar="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,7 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.activity.main.MainActivity">
-
+        <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            titlebar:centerText="标题栏"
+            titlebar:centerType="textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            titlebar:leftDrawablePadding="0dp"
+            titlebar:leftText="返回"
+            titlebar:leftType="textView" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

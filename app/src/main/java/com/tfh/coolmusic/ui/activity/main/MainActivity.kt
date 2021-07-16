@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.observe
 import com.tfh.coolmusic.R
-import com.tfh.coolmusic.app.base.activity.BaseLoadSirActivity
+import com.tfh.coolmusic.app.base.activity.BaseTitleBarActivity
 import com.tfh.coolmusic.databinding.ActivityMainBinding
-import com.tfh.coolmusic.ext.showEmpty
 import com.tfh.coolmusic.ext.showLoading
 import com.tfh.coolmusic.viewmodel.main.MainVm
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseLoadSirActivity<MainVm,ActivityMainBinding>() {
+class MainActivity : BaseTitleBarActivity<MainVm,ActivityMainBinding>() {
 
     override fun layoutId(): Int {
         return R.layout.activity_main
+    }
+
+    override fun getTitleBar(): CommonTitleBar {
+        return titlebar
     }
 
     override fun loadSirView(): View {
@@ -28,7 +32,7 @@ class MainActivity : BaseLoadSirActivity<MainVm,ActivityMainBinding>() {
     override fun createObserver() {
         mViewModel.isSuccess.observe(this){
             if (it){
-                loadsir.showEmpty()
+                loadsir.showSuccess()
             }
         }
     }
